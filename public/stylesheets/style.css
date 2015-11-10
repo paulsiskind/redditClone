@@ -22,7 +22,7 @@ img{
 .commentBar{
   text-align: center;
 }
-.comments.ng-hide-remove {
+/*.comments.ng-hide-remove {
   animation: fadeInDown 1s;
 }
 
@@ -36,4 +36,20 @@ img{
 
 .showComment.ng-hide-add {
   animation: fadeOutUp 1s;
+}*/
+ .css-form input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+}
+
+  .css-form input.ng-valid.ng-touched {
+    background-color: #78FA89;
+}
+.fade-in-out {
+  transition: 1s linear all;  
+  opacity: 1;
+
+
+.fade-in-out.ng-hide {
+   opacity: 0;
+ 
 }

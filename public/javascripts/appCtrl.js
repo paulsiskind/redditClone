@@ -27,7 +27,7 @@
                                           author: "Bog George",
                                           comment: "I slept with Prince"}],
                                    votes: 2,
-                                    date: 'WEDS Nov 04 2015 2:00:37 GMT-0700 (MST)',
+                                    date: 'WEDS Nov 04 2015 2:37:37 GMT-0700 (MST)',
                                  
                                    upVote: function(){
                                            console.log("upVote")
@@ -46,7 +46,7 @@
                                          author: "Jude Law",
                                          comment: "damn damn"}],
                                   votes: 10,
-                                   date: 'WEDS Nov 04 2015 2:00:37 GMT-0700 (MST)',
+                                   date: 'WEDS Nov 04 2015 1:00:37 GMT-0700 (MST)',
                                  upVote: function(){
                                            console.log("upVote")
                                            console.log(this.votes)
@@ -60,16 +60,16 @@
                                    
                   $scope.order = function(select) {
                     if(select === '-votes') {
-                      $scope.selection = 'Votes';
+                      $scope.viewBar = 'Votes';
                     }
                     if(select === 'date') {
-                      $scope.selection = 'Date';
+                      $scope.viewBar = 'Date';
                     }
                     if(select === 'title') {
-                      $scope.selection = 'Title';
+                      $scope.viewBar = 'Title';
                     }
                     $scope.select = select;
-                  }
+                    }
                
 
                  $scope.commentPost = function(){

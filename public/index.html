@@ -27,7 +27,7 @@
                 <li>
                   <ul class="nav navbar-nav">
                     <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort by {{selection}}<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort by {{viewBar}}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
                       <li><a href="#" ng-click="order('-votes')">Votes</a></li>
                       <li><a href="#" ng-click="order('date')">Date</a></li>
@@ -42,22 +42,24 @@
           </div>
         </nav>
              <div class='container'>
-               <div class='form' ng-show="showme">
+               <form novalidate class="css-form" name="myForm" ng-show="showme" class="fade-in-out">
                 <h1 class= "well">Reddit App</h1>
-                <h3>Title
-                <input type='text' class='form-control' name="title" placeholder='Title' ng-model='form.title' required><span style="color:red" ng-show="myForm.title.$dirty && myForm.title.$invalid">
-                <span ng-show="myForm.title.required"> Username is required.</span>
-                 </span></h3>
+                <h3>Title</h3>
+                <input type='text' class='form-control' name="title" placeholder='Title' ng-model='form.title' required>
+               
+              
                 <h3> Author</h3>
-                <input type='text' class='form-control' placeholder='Author' ng-model='form.author'>
+               
+                <input type='text' class='form-control' placeholder='Author' ng-model='form.author' required>
+              
                 <h3>Image URL</h3>
-                <input type='text' class='form-control' placeholder='Image URL' ng-model='form.url'>
+                <input type='text' class='form-control' placeholder='Image URL' ng-model='form.url' required>
                 <h3>Description</h3>
-                <input type='text' class='form-control' placeholder='Description' ng-model='form.description'> </br>
-                <button class='btn btn-success' ng-click="formButton(); showme=false" ng-disabled="myForm.title.$dirty &&  myForm.title.$invalid">>
+                <input type='text' class='form-control' placeholder='Description' ng-model='form.description' required> </br>
+                <button class='btn btn-success' ng-click="formButton(); showme=false" ng-disabled="myForm.$invalid">
                 Submit</button>
-                {{form}}
-             </div>
+              
+             </form>
            
              <div class="jumbotron" ng-repeat="display in displays | orderBy: select|filter: search ">
                <div class="col-md-2">
@@ -75,18 +77,19 @@
                  <p class="description">{{display.description}}</p>
                  <br>
                  <p class="commentBar">{{ display.date | amCalendar}} |
-                 <span ng-click="showComment= !showComment" class="glyphicon glyphicon-comment">Comment | </span>
+                 <span ng-click="showComment= !showComment" ><ng-pluralize count="display.comments.length" class="glyphicon glyphicon-comment" when="{'1': '1 Comment',
+                'other': '{} Comments'}"></span> |
                  <span ng-click='commentShow=true' class="glyphicon glyphicon-pencil">Add Comment</span></p>
 
-              <span ng-repeat="comment in display.comments" ng-show="showComment">
+              <span ng-repeat="comment in display.comments" ng-show="showComment" class="fade-in-out">
                <h5 class="comments"><strong>{{comment.author}}:   </strong>{{comment.comment}}</h5>
                </span>
                </span>
                
-              <form>
-               <div ng-show="commentShow">
-                <h4 class="addComments"> Author <input type="text" ng-model="commentNew.author"> Comment <input type="text" ng-model="commentNew.comment">
-                  <button class="btn btn-success" ng-click="commentShow=false; commentPost()">Submit</button> </h4>
+              <form novalidate class="css-form" name="myForm">
+               <div ng-show="commentShow" class="fade-in-out">
+                <h4 class="addComments"> Author <input type="text" ng-model="commentNew.author" required> Comment <input type="text" ng-model="commentNew.comment" required>
+                  <button class="btn btn-success" ng-click="commentShow=false; commentPost()" ng-disabled="myForm.$invalid">Submit</button> </h4>
                </div>
               </form>                                   
               
