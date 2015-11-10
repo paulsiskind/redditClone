@@ -1,7 +1,7 @@
 
               
               doSomething.controller("appCtrl", ["$scope", function($scope) {
-                // $scope.displays.votes =0;
+
                 $scope.displays = [{title: 'The Mysterious Green Toad',
                                    author: 'Humbert Humperdinck',
                                    url:"http://img.timeinc.net/time/photoessays/2010/top10_invasive/cane_toad.jpg",
@@ -10,6 +10,7 @@
                                        author:"Jack Sparrow",
                                        comment: "Arr, Matey!  I smell something fishy!"}],
                                    votes: 0,
+                                    date: 'WEDS Nov 04 2015 2:00:37 GMT-0700 (MST)',
                                   upVote: function(){
                                            console.log("upVote")
                                            console.log(this.votes)
@@ -26,6 +27,7 @@
                                           author: "Bog George",
                                           comment: "I slept with Prince"}],
                                    votes: 2,
+                                    date: 'WEDS Nov 04 2015 2:00:37 GMT-0700 (MST)',
                                  
                                    upVote: function(){
                                            console.log("upVote")
@@ -34,15 +36,6 @@
                                   downVote: function(){
                                             console.log('downVote')
                                             this.votes --}
-                                // commentPost: function(){
-                                //              this.comments.push(this.comment);
-                                //              console.log("comments")
-
-                                //              this.comment = {};
-                                //             }
-
-                                 
-                                 
                                 },
                                 {
                                   title: "Crazy Gringo",
@@ -53,6 +46,7 @@
                                          author: "Jude Law",
                                          comment: "damn damn"}],
                                   votes: 10,
+                                   date: 'WEDS Nov 04 2015 2:00:37 GMT-0700 (MST)',
                                  upVote: function(){
                                            console.log("upVote")
                                            console.log(this.votes)
@@ -65,7 +59,7 @@
 
                                    
                   $scope.order = function(select) {
-                    if(select === 'votes') {
+                    if(select === '-votes') {
                       $scope.selection = 'Votes';
                     }
                     if(select === 'date') {
@@ -88,7 +82,6 @@
 
                  }                  
                  $scope.formButton = function(){
-                 // $scope.transfer = $scope.form;
                  var date = new Date;
                  $scope.displays.push({ title: this.form.title,
                                       author: this.form.author,
@@ -106,14 +99,6 @@
                                       date: date});
                  $scope.form = {};
                 };
-                // $scope.upVote = function(){
-                //   console.log("upVote")
-                //   console.log(this.displays.votes)
-                //   this.displays.votes ++;
-                // }
-                //  $scope.downVote = function(){
-                //   console.log('downVote')
-                //   this.displays.votes -=1;
-                // }
+                $scope.showComment= false;
              
               }])

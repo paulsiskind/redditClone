@@ -1,14 +1,39 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: tan;
 }
 
 a {
   color: #00B7FF;
 }
 img{
-    width: 75%;
+    width: 95%;
 }
 .jumbotron{
     background-color: brown;
+}
+.author{
+  text-align: right;
+}
+.description, .comments, .addComments{
+ text-align: center;
+}
+.commentBar{
+  text-align: center;
+}
+.comments.ng-hide-remove {
+  animation: fadeInDown 1s;
+}
+
+.comments.ng-hide-add {
+  animation: fadeOutUp 1s;
+}
+
+.showComment.ng-hide-remove {
+  animation: fadeInDown 1s;
+}
+
+.showComment.ng-hide-add {
+  animation: fadeOutUp 1s;
 }

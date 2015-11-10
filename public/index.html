@@ -3,22 +3,8 @@
   <head>
     <meta charset="utf-8">
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-MfvZlkHCEqatNoGiOXveE8FIwMzZg4W85qfrfIFBfYc= sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-    <title>Something Great</title>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular-animate.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
-
-<!-- load angular-moment -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-moment/0.9.0/angular-moment.min.js"></script>
-    <style>
-
-   img{
-    width: 75%;
-   }
-   .jumbotron{
-    background-color: brown;
-   }
-   </style>
+    <title>Reddit Clone</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
    </head>
 <body>
         <div ng-controller="appCtrl">
@@ -31,20 +17,26 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#" ng-click="showme=true">Submit Post</a></li>
-                <li><input type="text" ng-model="search" placeholder="search"></li> 
+                <li>
+                 <form class="navbar-form" role="search">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Search" ng-model="search">
+                  </div>
+                </form>
+                </li> 
                 <li>
                   <ul class="nav navbar-nav">
                     <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sort by {{selection}}<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                      <li><a href="#" ng-click="order('votes')">Votes</a></li>
+                      <li><a href="#" ng-click="order('-votes')">Votes</a></li>
                       <li><a href="#" ng-click="order('date')">Date</a></li>
                       <li><a href="#" ng-click="order('title')">Title</a></li>
+                  </ul>
+                  </li>
                  </ul>
-                </li>
-              </ul>
                 </li> 
-               <!--  insert drop down menu -->
+              
               </ul>
             </div>
           </div>
@@ -52,15 +44,17 @@
              <div class='container'>
                <div class='form' ng-show="showme">
                 <h1 class= "well">Reddit App</h1>
-                <h3>Title</h3>
-                <input type='text' class='form-control' placeholder='Ttile' ng-model='form.title'>
+                <h3>Title
+                <input type='text' class='form-control' name="title" placeholder='Title' ng-model='form.title' required><span style="color:red" ng-show="myForm.title.$dirty && myForm.title.$invalid">
+                <span ng-show="myForm.title.required"> Username is required.</span>
+                 </span></h3>
                 <h3> Author</h3>
                 <input type='text' class='form-control' placeholder='Author' ng-model='form.author'>
                 <h3>Image URL</h3>
                 <input type='text' class='form-control' placeholder='Image URL' ng-model='form.url'>
-                <h3>Description<h3>
+                <h3>Description</h3>
                 <input type='text' class='form-control' placeholder='Description' ng-model='form.description'> </br>
-                <button class='btn btn-success' ng-click="formButton(); showme=false">
+                <button class='btn btn-success' ng-click="formButton(); showme=false" ng-disabled="myForm.title.$dirty &&  myForm.title.$invalid">>
                 Submit</button>
                 {{form}}
              </div>
@@ -69,38 +63,37 @@
                <div class="col-md-2">
                  <img src= {{display.url}} alt="Picture"></img>
                </div>
-               <div class="col-md-8">
-                 <h3>{{display.title}}
+               <div class="col-md-10">
+                 <h3>{{display.title}} |
                   <span class="glyphicon glyphicon-arrow-up" ng-click="display.upVote()"></span>
                   <span class="glyphicon glyphicon-arrow-down" ng-click="display.downVote()"></span>
                   {{display.votes}} </h3>
                </div>
-                 <p>{{display.author}}</p>
-               <div class="col-md-10">
-                 <p>{{display.description}}</p>
-                 <p>{{ display.date | amCalendar}}</p>
-                 <span ng-repeat="comment in display.comments">
-               <h5><strong>{{comment.author}}:   </strong>{{comment.comment}}</h5>
-              
+
+                 <p class="author"> Author: {{display.author}}</p>
+                 <br>
+                 <p class="description">{{display.description}}</p>
+                 <br>
+                 <p class="commentBar">{{ display.date | amCalendar}} |
+                 <span ng-click="showComment= !showComment" class="glyphicon glyphicon-comment">Comment | </span>
+                 <span ng-click='commentShow=true' class="glyphicon glyphicon-pencil">Add Comment</span></p>
+
+              <span ng-repeat="comment in display.comments" ng-show="showComment">
+               <h5 class="comments"><strong>{{comment.author}}:   </strong>{{comment.comment}}</h5>
+               </span>
+               </span>
+               
+              <form>
+               <div ng-show="commentShow">
+                <h4 class="addComments"> Author <input type="text" ng-model="commentNew.author"> Comment <input type="text" ng-model="commentNew.comment">
+                  <button class="btn btn-success" ng-click="commentShow=false; commentPost()">Submit</button> </h4>
                </div>
-
-
-               <!--  <div class="col-md-10">  -->
-                <form>
-                 <p ng-click='commentShow=true'>Comment</p>
-                 <div ng-show="commentShow">
-                  <h4> Author<input type="text" ng-model="commentNew.author"> Comment<input type="text" ng-model="commentNew.comment">
-                    <button class="btn btn-success" ng-click="commentShow=false; commentPost()">Submit</button> </h4>
-                 </div>
-                </form></span> 
-                 
-                 
+              </form>                                   
               
-             </div>
            </div>
-         </div>
-         </div>
-       </div>
+        </div>
+      </div>
+       
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.4/angular.min.js"></script>
