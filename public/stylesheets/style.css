@@ -22,23 +22,12 @@ img{
 .commentBar{
   text-align: center;
 }
-/*.comments.ng-hide-remove {
-  animation: fadeInDown 1s;
-}
 
-.comments.ng-hide-add {
-  animation: fadeOutUp 1s;
-}
-
-.showComment.ng-hide-remove {
-  animation: fadeInDown 1s;
-}
-
-.showComment.ng-hide-add {
-  animation: fadeOutUp 1s;
-}*/
  .css-form input.ng-invalid.ng-touched {
     background-color: #FA787E;
+}
+.well{
+  background-image: url("https://s-media-cache-ak0.pinimg.com/236x/a4/41/47/a4414711665cfc11e80e248333ba5bab.jpg");
 }
 
   .css-form input.ng-valid.ng-touched {
