@@ -1,0 +1,1 @@
+var doSomething = angular.module("app", ['angularMoment']);
