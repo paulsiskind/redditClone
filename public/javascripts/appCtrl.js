@@ -70,7 +70,8 @@
                     }
                     $scope.select = select;
                     }
-               
+                
+                
 
                  $scope.commentPost = function(){
 
